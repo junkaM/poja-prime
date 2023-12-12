@@ -4,11 +4,14 @@ import static java.util.UUID.randomUUID;
 
 import com.poja.prime.PojaGenerated;
 import com.poja.prime.endpoint.event.EventProducer;
+import com.poja.prime.endpoint.event.PojaPrime;
 import com.poja.prime.endpoint.event.gen.UuidCreated;
 import com.poja.prime.repository.DummyRepository;
 import com.poja.prime.repository.DummyUuidRepository;
 import com.poja.prime.repository.model.Dummy;
 import com.poja.prime.repository.model.DummyUuid;
+
+import java.math.BigInteger;
 import java.util.List;
 import lombok.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,5 +45,9 @@ public class HealthController {
 
     Thread.sleep(20_000);
     return dummyUuidRepository.findById(randomUuid).map(DummyUuid::getId).orElseThrow();
+  }
+  @GetMapping("/getNewPrime")
+  public BigInteger getPrime (){
+      return PojaPrime.getPrime();
   }
 }
